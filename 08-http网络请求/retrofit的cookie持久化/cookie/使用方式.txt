@@ -1,0 +1,15 @@
+  OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                        /*.addNetworkInterceptor(
+                                new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))*/
+                .cookieJar(new CookieManger(mContext))
+                // .addInterceptor(loginInterceptor)
+                //.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .build();
+        //使用Retrofit来实现Api接口 需要配置gson转换器
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(mGson))
+                .baseUrl(BASE_URL)
+                .build();
+        mApi = retrofit.create(Api.class);

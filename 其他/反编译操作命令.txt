@@ -1,0 +1,12 @@
+1.反编译资源文件，工具apktool
+
+使用如下的命令运行apktool_2.0.1.jar反编译MMTS-release-1.0.2.apk
+
+java -jar apktool_2.0.1.jar d -f E:\AndroidDevelopTool\Android反编译工具包\测试apk\MMTS-release-1.0.2.apk -o MMTS
+
+2.反编译dex文件。
+将apk文件解压缩，获取到classes.dex。
+将classes.dex放到dex2jar文件夹下，执行命令，d2j-dex2jar classes.dex，会在当前目录下生成classes-dex2jar.jar文件。
+
+3.查看jar.
+使用jd-gui工具。

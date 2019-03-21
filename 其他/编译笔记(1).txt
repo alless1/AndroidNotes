@@ -1,0 +1,30 @@
+LOCAL_JAVA_LIBRARIES  (共享库)只是编译的时候引用
+LOCAL_STATIC_JAVA_LIBRARIES  （静态库）最终会打包到apk里面
+
+三、 Android.mk基本组成
+
+LOCAL_PATH 定义了当前模块的相对路径，必须出现在所有的编译模块之前
+每个编译模块由include $(CLEAR_VARS) 开始，由include $(BUILD_XXX) 结束
+include $(CLEAR_VARS) 是一个编译模块的开始，它会清空除LOCAL_PATH之外的所有LOCA_XXX变量
+include $(BUILD_XXX) 描述了编译目标
+LOCAL_SRC_FILES 定义了本模块编译使用的源文件，采用的是基于LOCAL_PATH的相对路径
+LOCAL_MODULE 定义了本模块的模块名
+
+‘:=’是赋值的意思，'+='是追加的意思，‘$’表示引用某变量的值
+
+include $(BUILD_SHARED_LIBRARY)
+和上面相似，BUILD_SHARED_LIBRARY 表示编译一个共享库。
+以上三者的生成结果分别在如下目录中，generic 依具体 target 会变：
+out/target/product/generic/obj/APPS
+out/target/product/generic/obj/JAVA_LIBRARIES
+out/target/product/generic/obj/EXECUTABLE
+out/target/product/generic/obj/STATIC_LIBRARY
+out/target/product/generic/obj/SHARED_LIBRARY
+每个模块的目标文件夹分别为：
+1）APK程序：XXX_intermediates
+2）JAVA库程序：XXX_intermediates
+
+如果只是使用java静态库，可以include$(BUILD_STATIC_JAVA_LIBRARY)，这样只会生成在\out\target\common\obj\JAVA_LIBRARIES。
+
+
+\\192.168.1.8\dgg\mbx-7.1-CTS\out\target\product\enjoytv\system\lib64

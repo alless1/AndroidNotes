@@ -1,0 +1,5 @@
+安装包提取文件CERT.RSA
+keytool -printcert -file CERT.RSA
+
+签名文件debug.keystore(输入密码)
+keytool -list -v -keystore debug.keystore

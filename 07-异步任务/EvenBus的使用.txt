@@ -1,0 +1,26 @@
+简单使用一:
+1.在项目文件中添加依赖.
+Gradle:
+compile 'org.greenrobot:eventbus:3.0.0'
+
+2.接收方(activities/fragments)注册和取消注册.
+初始化的时候注册
+EventBus.getDefault().register(this);
+销毁的时候取消注册
+EventBus.getDefault().unregister(this);
+
+3.接收方用一条注释来声明接收的方法,注意是public,有参方法(否则会报错).
+@Subscribe(threadMode = ThreadMode.MAIN)
+public void XXX(Event x){};
+
+4.发送方使用post方法发送.
+EventBus.getDefault().post(new Event);
+ps:通过Event类型来区分不同的接收方
+
+5.注册和取消的时候 加上判断.
+if(!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+        
+
+if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);

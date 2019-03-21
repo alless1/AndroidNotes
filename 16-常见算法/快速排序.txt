@@ -1,0 +1,33 @@
+public void quick_sort1(int arr[], int l, int r) {
+		if (l < r) {
+			int i = l;
+			int j = r;
+			int x = arr[i];
+			while (i < j) {
+				while (i < j) {
+					if (arr[j] <= x) {
+						arr[i] = arr[j];
+						i++;
+						break;//如果右边找到一个可以调换的，就跳出循环，左边开始找了。
+					} else {
+						j--;
+					}
+				}
+				while (i < j) {
+					if (arr[i] > x) {
+						arr[j] = arr[i];
+						j--;
+						break;
+					} else {
+						i++;
+					}
+				}
+
+			}
+
+			arr[i] = x;
+			quick_sort1(arr, l, i - 1);//递归调用
+			quick_sort1(arr, i + 1, r);
+		}
+
+	}

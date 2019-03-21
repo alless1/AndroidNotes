@@ -1,0 +1,39 @@
+
+##Activity的启动模式
+* standard的启动模式， 默认标准的启动模式。
+>绝大多数的Activity都是采用的standard的启动模式，开启新的Activity，这个Activity就会被加载到任务栈的栈顶。返回退出Activity，就从任务栈里面移除。如果任务栈清空，应用程序退出。
+>应用场景：绝大多数默认的情况。
+
+*　singleTop
+>顶部只有一个实例存在，如果这个Activity的实例已经被加入到任务栈的栈顶，这个Activity就不会被重新创建。
+>应用场景：一个界面避免重复的开启很多次。singletop。 浏览器的书签
+
+* singleTask
+>单一任务栈： 在任务栈里面只可以有1个实例存在
+如果没有实例，就创建，加入到任务栈的栈顶，
+如果有实例已经存在，就直接复用这个实例，然后清空这个实例上面所有的Activity。
+>应用场景： 如果一个Activity的内存开销或者是cpu开销非常大。一般我们设置这个Activity为singletask的启动模式。保证任务栈里面只有一个实例存在。
+>浏览器的BrowserActivity内存开销非常大。
+>webkit 浏览器的内核。 解析html标签。解析css标签。JavaScript解析引擎。
+
+
+
+1、standard模式：系统默认的模式，即不管activity是否重复都会像栈里加入activity，因此在按返回键时每次销毁一个activity，因此按多次销毁任务栈里所有的activity才会退出程序。
+
+2、singleTop模式：当一个activity指定为该模式时，在点击调用该activity时，会检测栈顶是否为该activity如果是就调用栈里的activity，否则才会重新创建一个新的activity放入栈里。
+
+应该场景：如浏览器的添加书签activity，如果用户在添加书签的activity里添加了20书签，如果默认模式用户想退出书签需要按20次返回键，并创建20个activity到栈里浪费空间，应用该模式则只会创建一个书签activity，避免糟糕用户体验。
+
+3、singleTask模式：当一个activity指定为该模式时，在加载该activity时候会检测栈里是否有该activity，如果有则直接调用栈里的activity，同时销毁掉调用activity上面的所有activity。
+
+应该场景：如浏览器activity开销非常大，需要初始化webkit/c++嵌入式浏览器内核，将该activity配置成这个该模式。
+
+4、singleInstance模式，该模式很极端，当一个activity指定为该模式时，调用该activity时系统不会将activity放入默认的分配的任务栈，而是创建一个新的任务栈放入新的任务栈内。并在默认的任务栈内引用新任务栈里的该activity，当再次调用该activity时候再次引用新建栈内的activity，当按返回键销毁该activity时候就会销毁新任务栈内的该activity，并且销毁默认任务栈内的对该activity的所有引用。
+
+应该场景：适用全局都有的activity应该，可以节约内存。如有道词典，在每个界面activity都有调用查词的activity，我们可以将查词的activity配置为该模式。
+
+* singleinstance
+>前面的3种启动模式Activity都是运行在当前的应用程序默认任务栈里面。
+>singleinstance 自己单独开启一个任务栈运行。
+>在自己的单独的任务栈里面运行，整个手机操作系统里面只可能同时存在一个singleinstance实例的Activity。
+>应用场景： 有道词典，快速取词，通话界面

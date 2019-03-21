@@ -1,0 +1,102 @@
+查看端口占用情况
+netstat -ano
+
+adb shell dumpsys activity top
+adb shell dumpsys activity activities 显示当前activity
+
+监控进程5秒刷新
+adb shell "top -d 5 | grep com.hm.accelerator"
+
+退出
+exit
+
+ Android debug Bridge android调试桥 
+* AVD Android Virtual Device 模拟器
+
+
+## sdk目录结构 ##
+* add-ons 附加组件目录
+* build-tools 升级之后放的编译工具
+* docs 开发文档
+* extras android中放向下兼容的jar, intel中放模拟器加速软件
+* platforms android核心库
+* platform-tools 默认或未升级时存放编译工具 adb.exe连接模拟器或真机和电脑上开发工具
+* sources android framework 层源码
+* system-images android 系统镜像，用于模拟器
+* tools 工具，emulator.exe 模拟器程序
+
+## adb常用命令 ##
+先将adb.exe路径添加path环境变量
+
+* 列出在线的设备
+
+		> adb devices 
+
+		List of devices attached
+		emulator-5554   device
+		emulator-5556   device
+选择设备进入shell
+adb -s emulator-5554 shell
+* 安装软件adb install 电脑上apk文件路径（没中文）	-s emulator-5556 指定安装到哪个设备上
+
+		> adb -s emulator-5556  install D:\base07\GameTest.apk
+安装两种方式
+adb install -r 应用程序.apk
+也可以向手机传送文件
+adb push D:\test.apk /system/app/
+
+* 上传下载用ddms实现
+* 重启adb服务
+	
+		> adb kill-server
+		> adb start-server
+	
+* 进入android底层linux命令行方法
+
+
+> adb shell
+cd 打开指定目录
+ls 列出目录信息
+cat 打开指定文件
+ps 列出所有进程
+打开指定应用信息
+dumpsys meminfo 包名
+
+包存放位置
+/data/data
+
+apk文件存放位置
+/data/app
+/systen/app
+
+tools>adb remount 
+tools>adb shell 
+#su 
+#cd system/sd/data //进入系统内指定文件夹 
+#ls //列表显示当前文件夹内容 
+#rm -r xxx //删除名字为xxx的文件夹及其里面的所有文件 //强制删除文件夹.
+#rm xxx //删除文件xxx 
+#rmdir xxx //删除xxx的文件夹//有文件无法删除
+#mkdir xxx //创建文件夹
+
+打开数据表的操作sqlite
+1.进入数据库 sqlite3 xxx.db
+2.查看所有表 .tables
+3.设置显示方式 .mode column
+		.header on
+4.查询表内容 select*from 表名;   注意分号结尾
+5.退出 .exit
+
+
+进程管理
+adb shell kill [PID]       //杀死进程  
+adb 命令查看程序进程方便简洁高效  
+adb shell ps       //查看所有进程列表，Process Status  
+adb shell ps|grep <package_name>    //查看package_name程序进程  
+adb shell ps -x [PID]      //查看PID进程状态  
+adb shell top|grep <package_name> //实时监听程序进程的变化  
+  
+eg:  
+adb shell ps -x 13699  
+USER           PID    PPID    VSIZE     RSS     WCHAN      PC               NAME  
+u0_a94    13699 1734  1653292 28404   ffffffff    00000000 S com.polysaas.mdm (u:6, s:6) 

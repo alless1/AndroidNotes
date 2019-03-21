@@ -1,0 +1,43 @@
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import java.lang.ref.WeakReference;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Handler handler  ;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        handler = new MyHandler( this ) ;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+               handler.sendEmptyMessage( 0 ) ;
+            }
+        }).start() ;
+
+    }
+
+    private static class MyHandler extends Handler {
+        WeakReference<MainActivity> weakReference ;
+
+        public MyHandler(MainActivity activity ){
+            weakReference  = new WeakReference<MainActivity>( activity) ;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( weakReference.get() != null ){
+                // update android ui
+            }
+        }
+    }
+
+}

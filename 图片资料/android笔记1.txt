@@ -1,0 +1,99 @@
+一.context 上下文
+全局的环境对象,提供很多方便的操作,获取路径,资源文件,常规操作.
+
+获取程序私有目录:
+this.getFilesDir() == /data/data/包名/files/ 
+this.getCacheDir()==  /data/data/包名/cache/
+
+快速获取输出流:
+this.openFileInput（"文件名"）；
+this.openFileOutput（"文件名",权限）；
+
+获取sharedpreference:
+this.getSharedPreferences("文件名", 权限)
+
+
+二.xml文件序列化和反序列化
+序列化:
+XmlSerializer serializer = Xml.newSerializer();
+serializer.setOutput(os, "utf-8");
+反序列化:
+XmlPullParser parser = Xml.newPullParser();
+parser.setInput(inputStream, "utf-8");
+
+三.Sqlite轻量数据库
+创建帮助类:
+public class MyDBOpenHelper extends SQLiteOpenHelper{};
+获得数据库:
+        //执行下面的一行代码，数据库是不会别创建的了。
+        MyDBOpenHelper helper = new MyDBOpenHelper(this);
+        //如果想创建数据库必须执行,下一行代码
+        SQLiteDatabase db = helper.getWritableDatabase();
+	//执行数据库的增删改查
+	db.close();
+
+四.主线程
+不管是什么平台的带界面的应用程序,都是死循环,监听系统各种事件.
+所以主线程很重要,不允许执行耗时操作,界面更新必须在主线程.
+1.不允许主线程进行网络请求.android4.0以后抛出异常:NetworkOnMainThreadException;
+2.谁创建的View,谁才能修改编辑View,只有主线程才能修改View.(suifaceview可以在子线程更新UI)
+	* 如何使用消息处理器
+	>1. 在主线程里面声明handler
+			private  Handler handler = new Handler(){} ;
+	>2. 子线程想去更新ui，利用消息机制
+			Message msg = new Message();
+			msg.what 消息类型
+			msg.obj 具体消息携带的数据
+			handler.sendMessage(msg);
+	>3. 系统内部有消息队列和looper，轮询到消息，交给handler去处理
+	>4. 重写handler的方法处理消息
+			public void handleMessage(Message msg) {
+				//运行在主线程，更新ui
+			};
+
+五.四大组件
+* Activity 活动界面
+* Broadcast Receiver 广播接受者
+* Service 服务
+* Content Provider 内容提供者
+1.都需要在清单文件注册.
+
+##Activity生命周期的分类
+* entire lifetime 完整生命周期
+> oncreate()-->onstart()-->onResume()->onpause-->onStop()-->onDestory();
+
+* visible lifetime 可视生命周期
+> onStart()-->onResume() ->onpause()-->onStop();
+
+* foreground lifetime 前台生命周期
+> onResume()-->onPause()
+
+##进程和应用的关系
+所有的组件都是运行在同一个进程的同一个线程（main）里面.
+系统根据进程的优先级回收进程,释放内存.
+* Foreground process 前台进程
+> 你还能看到应用程序的界面。并且可以操作这个应用程序。
+* Visible process 可视进程
+> 你能看到这个应用程序，但是操作不了。
+* Service process 服务进程
+>应用程序带一个后台运行的服务，服务没有停止。
+* Background process 后台进程
+> 应用程序被最小化了，但是没有退出。
+* Empty process 空进程
+> 应用程序没有任何活动的组件了
+
+##服务的生命周期
+* startService---stopService
+> oncreate()--->onstartCommand()--->onDestory();
+* bindService---unbindService
+>onCreate()-->onbind()-->onUnbind()-->ondestroy();
+>采用混合的方式开启服务： 1.服务长期后台运行 2.可以调用服务的方法。
+
+组件间的数据共享:
+Intent传递数据是线性的,效率低,开销大.
+基于文件的数据共享策略,适合有持久化需求的小数据共享,应用设置数据.
+使用全局的应用环境对象.
+
+进程间的数据共享:
+内容提供者Content Provider- 增删改查数据的接口.
+绑定服务 组件间的通信连接-对数据的操作和处理.

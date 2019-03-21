@@ -1,0 +1,5 @@
+retrofit简化了网络请求，
+内部对OkHttp做了封装（2.0以后默认使用的是OkHttp），
+可以自定义数据转化器。
+（同时提供RxJava支持(返回Observable对象)，配合Jackson(或者Gson)和RxJava，再加上Dagger2，你的效率至少可以提高一倍。）
+retrofit与picasso一样都是在okhttp基础之上做的封装，项目中可以直接用了。

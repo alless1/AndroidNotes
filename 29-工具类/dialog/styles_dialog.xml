@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 全局Dialog样式 -->
+    <style name="BaseMeasureDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <!-- 确认弹窗 -->
+    <style name="BaseDialogWhite" parent="BaseMeasureDialogStyle">
+        <item name="android:windowBackground">@drawable/bg_base_dialog</item>
+    </style>
+
+    <!-- 确认弹窗 -->
+    <style name="BaseDialogBlack" parent="BaseMeasureDialogStyle">
+        <item name="android:windowBackground">@drawable/bg_base_dialog</item>
+    </style>
+
+</resources>

@@ -1,0 +1,27 @@
+补间动画的局限性：
+1.补间动画是只能够作用在View上。
+2.只能够实现移动、缩放、旋转和淡入淡出这四种动画操作。
+3.只是改变了View的显示效果而已，而不会真正去改变View的属性。
+
+新引入的属性动画机制已经不再是针对于View来设计的了，也不限定于只能实现移动、缩放、旋转和淡入淡出这几种动画操作，同时也不再只是一种视觉上的动画效果了。它实际上是一种不断地对值进行操作的机制，并将值赋值到指定对象的指定属性上，可以是任意对象的任意属性。所以我们仍然可以将一个View进行移动或者缩放，但同时也可以对自定义View中的Point对象进行动画操作了。我们只需要告诉系统动画的运行时长，需要执行哪种类型的动画，以及动画的初始值和结束值，剩下的工作就可以全部交给系统去完成了。
+
+
+既然属性动画的实现机制是通过对目标对象进行赋值并修改其属性来实现的，那么之前所说的按钮显示的问题也就不复存在了，如果我们通过属性动画来移动一个按钮，那么这个按钮就是真正的移动了，而不再是仅仅在另外一个位置绘制了而已。
+
+实现组合动画功能主要需要借助AnimatorSet这个类，这个类提供了一个play()方法，如果我们向这个方法中传入一个Animator对象(ValueAnimator或ObjectAnimator)将会返回一个AnimatorSet.Builder的实例，AnimatorSet.Builder中包括以下四个方法：
+
+    after(Animator anim)   将现有动画插入到传入的动画之后执行
+    after(long delay)   将现有动画延迟指定毫秒后执行
+    before(Animator anim)   将现有动画插入到传入的动画之前执行
+    with(Animator anim)   将现有动画和传入的动画同时执行
+
+好的，有了这四个方法，我们就可以完成组合动画的逻辑了，那么比如说我们想要让TextView先从屏幕外移动进屏幕，然后开始旋转360度，旋转的同时进行淡入淡出操作，就可以这样写：
+[java] view plain copy
+
+    ObjectAnimator moveIn = ObjectAnimator.ofFloat(textview, "translationX", -500f, 0f);  
+    ObjectAnimator rotate = ObjectAnimator.ofFloat(textview, "rotation", 0f, 360f);  
+    ObjectAnimator fadeInOut = ObjectAnimator.ofFloat(textview, "alpha", 1f, 0f, 1f);  
+    AnimatorSet animSet = new AnimatorSet();  
+    animSet.play(rotate).with(fadeInOut).after(moveIn);  
+    animSet.setDuration(5000);  
+    animSet.start();  

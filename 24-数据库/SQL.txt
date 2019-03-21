@@ -1,0 +1,64 @@
+创建表
+CREATE TABLE 表名(id integer , name varchar(20), pwd varchar(20))
+CREATE TABLE 表名(列名1 数据 , 列名2 数据, 列名3 数据)
+
+
+primary key autoincrement表示自动填充
+
+一、
+SELECT 语句 想选择什么，从什么地方选择
+基本格式：
+SELECT  列名1,列名2…  FROM 表名 Where id = xx
+例:列名是想要得到的列,Where后面就跟选择的条件,例如
+select phone from contacts where name = zhangsan 
+想要从contacts表中查询到姓名为zhangsan的电话phone.
+
+关键字：
+DISTINCT	放在列名前面，作用于所有列，表示显示不重复的值。
+
+子句：
+WHERE		可以设定筛选条件，放在表名后面。
+LIMIT 5		指不超过5行，放在表名后面。
+ORDER BY 列名 	根据指定的列排序。位置必须放在最后。
+
+二、
+INSERT 插入
+
+基本格式：
+INSERT INTO 表名(列名1,列名2,…) VALUES(值1,值2…);
+注意：列和值一一对应，如果有的列没有值，会自动出现null值。
+
+三、
+UPDATE 要更新的表，列名和对应的值，确定过滤条件。
+UPDATE 表名 SET 列1="值1",列2="值2"…  WHERE 列x="值x"
+注意：WHERE不要忘了！
+
+
+四、删除行。
+DELETE FROM 表名 WHERE 列1="值1",列2="值2";
+注意：WHERE不要忘了，如果忘了就会删除每一行。
+
+
+
+
+
+
+
+
+drop table if exists 表名
+删除表
+primary key autoincreament
+主键自动填充
+
+alter table student add money varchar(20);增加列
+
+TRUNCATE TABLE更快的删除所有行。
+
+UPDATE可以将整列值设为null（相当于删除列？）
+
+（从一个表复制到另一个表
+SELECT * INTO　表１ FROM 表2 ;
+*代表复制所有列。）
+允许INSERT 嵌套 SELECT：
+INSERT INTO 表名1(列名1,列名2,…) SELECT 列名1,列名2… FROM 表名2;
+

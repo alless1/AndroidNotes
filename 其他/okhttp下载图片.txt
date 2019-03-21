@@ -1,0 +1,32 @@
+ /*OkHttpUtils.okHttpGetRequest(infoResp.getImage(), new RequestListener() {
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        InputStream inputStream = response.body().byteStream();
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        File file = new File(ImageUtils.getDiskCacheDir(SplashActivity.this), "advert.jpg");
+                        if (file.exists())
+                            file.delete();
+                        file.createNewFile();
+                        FileOutputStream out = new FileOutputStream(file);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                        out.flush();
+                        out.close();
+                        SPUtils.setLastAdImage(infoResp.getImage());
+                        isAlreadySaveImage = true;
+                    } catch (Exception e) {
+                        SPUtils.setLastAdImage("");
+                        isAlreadySaveImage = false;
+                    }
+
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        nextPage();
+                    }
+                });
+
+            }
+        });*/

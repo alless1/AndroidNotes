@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--屏幕适配-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>H5和Android通信Demo</title>
+    <script src="js/jquery.min.js"></script>
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        button {
+            width: 90%;
+            height: 48px;
+            border-radius: 6px;
+            margin-left: 5%;
+            margin-right: 5%;
+            border-style: none;
+            margin-top: 10px;
+            font-size: 20px;
+            background-color: #209cff;
+            color: white;
+        }
+
+        button:active {
+            background-color: #294bff;
+        }
+    </style>
+</head>
+<body>
+<button id="btn1">js调用Android方法</button>
+
+<script>
+
+
+    /*默认json字符串当成json对象，格式决定*/
+    var receiveMessage = function(json){
+        alert("接收到Android传递过来的参数"+JSON.stringify(json));
+        console.log("name="+json.name+",msg="+json.msg);
+    };
+
+    $("#btn1").on("click", function(){
+        console.log("点击了按钮");
+        alert("点击了按钮");
+        //调用Android方法
+       /// window.android映射字符串.方法名(参数)
+        //面向对象：对象.方法名(参数)
+        var json = {"name" :"js", "msg":"您好，我是js，不想加你蚝友!"};
+        window.jsInterface.showToast(JSON.stringify(json));
+    });
+
+
+    //获取酒店数据：混合开发，尽量少使用js发送网络请求，因为Android已经封装好了网络请求，这个时候开业使用Android方法获取服务器数据，返回给js
+    var json = {"callback":"receiveHotelDataDetail"};
+    window.jsInterface.getHotelData(JSON.stringify(json));
+
+    var  receiveHotelDataDetail = function(json){
+        alert(JSON.stringify(json));
+    };
+
+</script>
+</body>
+</html>

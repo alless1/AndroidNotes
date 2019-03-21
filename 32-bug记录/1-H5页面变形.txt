@@ -1,0 +1,22 @@
+现象：坚果pro手机 安卓7.1 使用腾讯框架Sonic 打开H5产品购买页，重复进入会出现底部Ui缺口，中间缩小，H5 Ui变形的效果。
+其他手机没有问题，不使用腾讯框架在坚果手机上也是正常的。
+
+1.猜测：框架问题
+将同样的页面url放置到框架demo中显示，显示正常。
+2.猜测：参数配置的问题。
+尝试了所有参数设置以后还是不行，索性直接将demo中的Activity原封不动拿到应用中，显示bug。
+3.猜测：猜测应用版本主题问题。
+新建demo，设置了和应用一模一样的版本主题，显示bug。
+4.猜测：猜测跳转页的问题。
+禁用了所有方法，只留下跳转方法，显示bug。
+5.猜测：xml布局文件问题。
+取消了所有控件只留下TextView作为点击，显示bug。将demo中的xml拿过来，里面只包含button，显示正常。
+6.猜测：TextView和Button的问题。
+将TextView换成Button，问题解决！！！
+7.猜测：属性问题
+通过对比，发现Button比TextView默认会多一个StateListAnimator成员对象。
+如果给TextView也设置一个StateListAnimator，显示正常。
+
+结论：这个bug是由StateListAnimator影响的，但是如何影响的，还是不得而知。
+
+StateListAnimator 是和 Material Design 一同在 API 21 引入的，可以用来方便的实现交互反馈的视觉效果。用来实现点击的动画效果。

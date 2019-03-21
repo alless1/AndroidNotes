@@ -1,0 +1,41 @@
+1.通过url请求（登录）,获取到响应头，保存JSESSIONID。
+2.将JSESSIONID设置到Cookie。
+
+  /**
+     * 请求网络，获取到JSESSIONID并保存。
+     * @param url
+     */
+    public static void saveCookieByUrl(String url){
+        HttpClient httpClient=new DefaultHttpClient();
+        HttpGet httpGet=new HttpGet(url);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HttpResponse response=httpClient.execute(httpGet);
+                    Header header = response.getFirstHeader("Set-Cookie");
+                   if(header==null){
+                       return;
+                   }
+                  SharePreferenceHelper.getInstance().setValue("cookie",header.getValue());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+   /**
+     * 设置Cookie
+     */
+    private void loadWeb() {
+       // String strSSO = SharePreferenceHelper.getInstance().getValue("strSSO");
+        CookieSyncManager.createInstance(this);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.removeAllCookie();
+        String cookie = SharePreferenceHelper.getInstance().getValue("cookie");
+        cookieManager.setCookie(mUrl,cookie);
+        CookieSyncManager.getInstance().sync();
+        mWebView.loadUrl(mUrl);
+    }

@@ -1,0 +1,10 @@
+1.创建OkhttpClient并添加Cookiejar
+	CookieJarImpl cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+2.在Retrofit初始化时
+	 mRetrofit = new Retrofit.Builder()
+                .client(client)
+				...
+				.build();

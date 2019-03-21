@@ -1,0 +1,27 @@
+    File file = new File(ctx.getExternalFilesDir("Download")+"/"+fileName);
+       // File file = new File(ctx.getExternalFilesDir(fileName));
+        try {
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            //打开应用程序私有目录下文件，如果不存在就创建
+            /*FileOutputStream outputStream = ctx.openFileOutput(fileName, Context.MODE_APPEND);//其实可以用获取到的文件名|Context.MODE_WORLD_WRITEABLE
+            outputStream.write(mDataBuffer.readBytes(mDataBuffer.readableBytes()));
+            outputStream.close();*/
+            FileOutputStream outputStream = new FileOutputStream(file,true);
+            outputStream.write(mDataBuffer.readBytes(mDataBuffer.readableBytes()));
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    public File getDiskCacheDir(Context context, String uniqueName) {
+        String cachePath;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            cachePath = context.getExternalCacheDir().getPath();
+        } else {
+            cachePath = context.getCacheDir().getPath();
+        }
+        return new File(cachePath + File.separator + uniqueName);
+    }

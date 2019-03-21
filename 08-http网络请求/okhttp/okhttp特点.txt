@@ -1,0 +1,4 @@
+HttpUrlConnection和OkHttp是同一级别的，底层都是Socket实现，但是用的IO不一样，Volley只是把httpUrlConnection包装了一下。
+HttpUrlConnection只支持1.0/1.1，没有多路复用，碰到app大量网络请求的时候，性能比较差。
+OkHttp用的是Okio这个开源库，比IO流更强大，支持缓冲，Gzip压缩。
+Okio是一个增强 java.io 和 java.nio的库

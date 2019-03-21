@@ -1,0 +1,5 @@
+handler message MessageQueue Looper
+一套消息机制。
+Looper.prepare方法里创建了looper,并保存在sThreadLocal中（ThreadLocal保证了每个线程都有唯一的Looper），在looper的构造函数中创建了MessageQueue。
+在handler的构造方法里，关联了Looper和MessageQueue。
+ActivityThread类的main方法中调用了Looper.prepareMainLooper()，创建了looper,UI线程通过getMainLooper()获取到looper对象。（不需要手动调用Looper.prepare()）

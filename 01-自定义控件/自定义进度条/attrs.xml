@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 设置中心SettingItemView -->
+    <declare-styleable name="SettingItemView">
+
+        <!-- 属性，文本 -->
+        <attr name="sivText" format="string" />
+        <!-- 设置背景：first、middl、last -->
+        <attr name="sivBackground">
+            <enum name="first" value="0" />
+            <enum name="middle" value="1" />
+            <enum name="last" value="2" />
+        </attr>
+        <!-- 开关状态 -->
+        <attr name="sivToggleStatus" format="boolean" />
+        <attr name="sivToggleVisiable" format="boolean" />
+    </declare-styleable>
+
+    <!-- 自定义Progress状态View -->
+    <declare-styleable name="ProgressStatusView">
+        <!-- 属性，文本 -->
+        <attr name="psvTitle" format="string" />
+        <attr name="psvLeft" format="string" />
+        <attr name="psvRight" format="string" />
+    </declare-styleable>
+
+</resources>

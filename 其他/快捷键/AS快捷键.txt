@@ -1,0 +1,66 @@
+AS快捷键的设置（熟悉）
+编辑
+
+    //自动补全 Ctrl + Space(基本), Ctrl + Shift + Space(智能补全）
+
+
+
+    单行注释 Ctrl + /
+    多行注释 Ctrl + Shift + /
+    意图和快速修复 Alt + Enter
+    格式化代码 Ctrl + Alt + L
+    复制行或块 Ctrl + D
+    删除行或者块 Ctrl + Y
+
+查看
+	类结构 Ctrl + F12
+	类继承关系 Ctrl + H
+	被引用的类或方法 Alt + F7 右键find usages
+
+
+
+向导
+
+    查找类 Ctrl + N
+    查找文件 Ctrl + Shift + N
+    查找类里面的函数 Ctrl + F12
+    查找行 Ctrl + G
+    查找实现 Ctrl + Alt + B
+    查找任意 Shift + Shift
+    跳转到错误 F2
+
+重构
+
+    抽取方法 Ctrl + Alt + M
+    抽取变量 Ctrl + Alt + V
+    抽取成员变量 Ctrl + Alt + F
+    抽取常量 Ctrl + Alt + C
+
+
+---------------------------------------
+
+
+移动当前行 Alt + Shift + 方向键;
+复制当前行到下一行 Ctrl+D;
+删除当前行 Ctrl + Y;
+自动导入需要的包和删除多余的包 Ctrl + Alt + O;
+切换代码视图 Alt + Left/Right;
+修复:Alt + Enter ;
+代码补全 Ctrl + Shift + Enter;
+
+设置 Ctrl + Alt + S;
+智能提示:Ctrl+Alt+Space ;(eclipse alt+/)
+格式化代码 Ctrl + Alt + L;
+转换程成员变量:Ctrl + Alt + F ;
+新建类或布局:Ctrl + Alt + Insert;
+try/catch :Ctrl + Alt + T;
+方法参数提示:Ctrl + P;
+
+Ctrl+R 替换文本 (可以选中高亮部分)
+Alt + 鼠标选中部分,竖直复制文本
+
+回到上次浏览的位置ctrl+alt+left/right
+
+全局搜索 Ctrl + Shift + F
+ 
+

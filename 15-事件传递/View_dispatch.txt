@@ -1,0 +1,44 @@
+	public boolean dispatchTouchEvent_View1(MotionEvent ev){
+		return mOnTouchListener.onTouch()?true:onTouchEvent(ev);;
+	}
+
+	public boolean onTouchEvent(MotionEvent ev){
+	  return 控件可点击?true:false;
+	}
+	
+	
+	   /**
+     * ViewGroup的dispatchTouchEvent 核心代码
+     * @param ev
+     */
+    public void dispatchTouchEvent_ViewGroup(MotionEvent ev){
+        if(!onInterceptTouchEvent(ev)) {//不拦截
+            //for循环遍历 找到正在点击的view
+            if (child.dispatchTouchEvent(ev)) {
+
+                return true;//如果子类dispatchTouchEvent = true,返回true
+            }
+        }
+
+        //如果点击的是空白处.或者没有子类消费事件
+        if (target == null) {
+
+            return super.dispatchTouchEvent(ev);
+            // 调用ViewGroup父类的dispatchTouchEvent()，即View.dispatchTouchEvent()
+            // 因此会执行ViewGroup的onTouch() ->> onTouchEvent() ->> performClick（） ->> onClick()，即自己处理该事件，事件不会往下传递（具体请参考View事件的分发机制中的View.dispatchTouchEvent（））
+            // 此处需与上面区别：子View的dispatchTouchEvent（）
+        }
+    }
+
+    /**
+     * 分析1：ViewGroup.onInterceptTouchEvent()
+     * 作用：是否拦截事件
+     * 说明：
+     *     a. 返回true = 拦截，即事件停止往下传递（需手动设置，即复写onInterceptTouchEvent（），从而让其返回true）
+     *     b. 返回false = 不拦截（默认）
+     */
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+
+        return false;
+
+    }

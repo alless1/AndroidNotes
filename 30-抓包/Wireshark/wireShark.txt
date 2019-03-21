@@ -1,0 +1,7 @@
+将手机连上电脑上分享出来的网络就可以抓取手机的网络包了，不用选无线网卡，选有网络波动的本地连接就可以。
+过滤：
+1.通过ip或域名过滤
+ip.addr == gslv2.51changke.com
+
+
+//ip.addr == 192.168.3.33 or dns.qry.name contains "gslv2.51changeke.com"

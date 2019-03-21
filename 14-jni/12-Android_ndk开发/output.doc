@@ -1,0 +1,112 @@
+<h1 id="使用android-studio进行ndk开发">使用Android studio进行ndk开发</h1>
+<h2 id="方式一ndk-build">方式一(ndk-build)</h2>
+<h3 id="下载ndk">1.下载ndk</h3>
+<div class="figure">
+<img src="img/1_down_ndk.png" />
+
+</div>
+<h3 id="设置">2.设置</h3>
+<pre><code>在gradle.properties里加一句：android.useDeprecatedNdk=true</code></pre>
+<div class="figure">
+<img src="img/2_use_ndk.png" />
+
+</div>
+<h3 id="使用">3.使用</h3>
+<h4 id="a.新建java类">a.新建java类</h4>
+<pre><code>public class JniTest2 {
+//静态代码块，导入c库。
+static{
+    System.loadLibrary(&quot;jniLab2&quot;);
+}
+
+//提供方法接口调用c代码，比普通接口多个native。
+public native String getString();
+}</code></pre>
+<h4 id="b.生成头文件">b.生成头文件</h4>
+<pre><code>根据class文件生成头文件（找不到class文件位置make project一下）
+
+在main目录下执行命令：javah -d jni -classpath E:\DEMO\NDKDemo\ndkdemo2\build\intermediates\classes\debug com.alless.ndkdemo2.JniTest2
+
+会在main目录下生成jni目录，并生成.h文件。</code></pre>
+<div class="figure">
+<img src="img/3_to_head_h.png" />
+
+</div>
+<h4 id="c.编写cc文件">c.编写c/c++文件</h4>
+<pre><code>将头文件里面的方法名复制进c文件中，补充其他参数。
+
+c/c++文件后缀应该要与代码里面的书写方式对应。</code></pre>
+<div class="figure">
+<img src="img/4_cpp.png" />
+
+</div>
+<h4 id="d.添加build规则">d.添加build规则</h4>
+<pre><code>在build.gradle的defaultConfig中添加：
+
+    ndk {
+        moduleName &quot;jniLab2&quot;         //生成的so名字
+        abiFilters &quot;armeabi-v7a&quot;, &quot;x86&quot;  //输出指定三种abi体系结构下的so库。
+        stl &quot;stlport_static&quot;    //打开.c 的 debug 
+    }
+
+无法生成&quot;armeabi&quot;，弹出警告：
+Error:(81) Android NDK: Application targets deprecated ABI(s): armeabi    
+Error:(82) Android NDK: Support for these ABIs will be removed in a future NDK release.  </code></pre>
+<h4 id="e.生成so文件">e.生成so文件</h4>
+<pre><code>运行或编译会在文件夹：E:\DEMO\NDKDemo\ndkdemo2\build\intermediates\ndk\debug\lib
+生成so文件，可以复制出去。</code></pre>
+<h4 id="f.so文件存放位置">f.so文件存放位置</h4>
+<pre><code>1.放置在main-&gt;jniLibs目录下。</code></pre>
+<div class="figure">
+<img src="img/5_save_jnilibs.png" />
+
+</div>
+<pre><code>2.放置在app-&gt;libs目录下，需要在build.gradle的defaultConfig中添加
+
+    sourceSets{
+        main{
+            jniLibs.srcDirs = [&#39;libs&#39;]
+        }
+    }</code></pre>
+<div class="figure">
+<img src="img/5_save_libs.png" />
+
+</div>
+<h2 id="方式二cmake">方式二(CMake)</h2>
+<h3 id="下载ndk-1">1.下载ndk</h3>
+<div class="figure">
+<img src="img/1_down_ndk.png" />
+
+</div>
+<h3 id="新建project">2.新建project</h3>
+<pre><code>勾选 include C++ support,自动生成各种需求文件。</code></pre>
+<div class="figure">
+<img src="img/6_include_c.png" />
+
+</div>
+<h3 id="自动生成">3.自动生成</h3>
+<pre><code>main目录下多出cpp文件夹，包含c/c++文件。
+module目录下多出CMakeLists.txt文件。
+build.gradle里增加配置信息。</code></pre>
+<p><img src="img/7_cmake_1.png" /> <img src="img/7_cmake_2.png" /> <img src="img/7_cmake_3.png" /> <img src="img/7_cmake_4.png" /></p>
+<h3 id="生成so文件">4.生成so文件</h3>
+<pre><code>make project一下，生成所有架构的so文件，如果需要指定输出需配置。</code></pre>
+<div class="figure">
+<img src="img/7_cmake_5.png" />
+
+</div>
+<h2 id="总结">总结</h2>
+<pre><code>ndk开发流程：
+1.编写需要用来调用c代码的专用java类
+2.编写与java类对应的c文件。（遵守jni书写规则）
+3.将c文件编译成so文件。（在linux平台下运行的二进制文件）
+java类和so文件可移植使用。</code></pre>
+<h2 id="问题">问题</h2>
+<pre><code>1，cmake指定输出so文件位置。
+在CMakeLists.txt文件中配置：
+# 设置生成的so动态库最后输出的路径
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI})</code></pre>
+<div class="figure">
+<img src="img/8_cmake_question.png" />
+
+</div>

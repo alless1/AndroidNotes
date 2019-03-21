@@ -1,0 +1,10 @@
+    public PopupWindow loginCheck() {
+        PopupWindow popupWindow = new PopupWindow();
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);
+        View view = LayoutInflater.from(this).inflate(R.layout.popup, null);
+        popupWindow.setContentView(view);
+        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        return popupWindow;
+    }

@@ -1,0 +1,4 @@
+1.添加jar包，qrcode-lib.jar。
+2.一行代码使用。
+基本使用（有多个重载方法，设置参数。）
+mImageView.setImageBitmap(QRCodeUtil.createQRCodeBitmap("Hello World!", 400));

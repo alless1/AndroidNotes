@@ -1,0 +1,88 @@
+一、重新挂载，修改system文件夹权限
+
+mount -o remount,rw /system      
+
+//接挂命令，system 可以换为其他目录。只有接挂后才可对该分区进行写，更改，删除等操作，可以修改被保护的文件
+
+二、关闭内核打印。
+
+echo 0 >/proc/sys/kernel/printk
+
+如果提示permissive = 0;需要执行以下操作：
+重启，出现界面长按enter。
+
+reboot;
+
+#修改权限，关闭内核打印 #保存，重启
+
+setenv EnableSelinux permissive;
+saveenv; reset 
+
+三、源码编译
+
+打开设备文件路径
+
+cd mbx-7.1-TV/ \n
+
+1.预编译文件(enjoytv-user-64是设备文件夹)
+
+source ./build/envsetup.sh \n
+
+2.lunch 设备路径
+lunch enjoytv-user-64 \n
+lunch stvs9-userdebug-32
+lunch txlx_t962x_r311-userdebug-32
+
+3.进入项目根目录。（打开android.mk文件路径）
+
+cd vendor/geniatech/DTVPlayer-7.1_cts_new/TvMiddleware \n
+
+4.执行编译命令
+
+mm -B
+
+
+四、日志过滤
+
+logcat | grep GLauncherActivity
+
+五、查找
+find <指定目录> <指定条件> <指定动作>
+find ./ -name \*.c
+find . -name 'my*' -ls
+
+六、git命令
+当前分支
+git branch
+所有分支
+git branch -a
+切换到分支
+gie checkout 分支名
+
+启用网络adb 调试可以使用以下命令：
+stop adbd 
+setprop service.adb.tcp.port 5555
+
+启用网络调试
+    $su (需要root权限)
+　　#stop adbd
+　　#setprop service.adb.tcp.port 5555
+　　#start adbd
+
+也可以到系统中打开USB 调试，实际是网络adb 调试
+
+
+
+重新启用SELinux ，只需要进入reboot recovery 即可
+
+编译应用
+cd mbx-7.1-TV/ \n
+source ./build/envsetup.sh \n
+lunch enjoytv_hybrid-user-64 \n
+cd vendor/geniatech/ \n
+
+goole账号：jiangjiao2525@gmail.com   zhou25_0710
+
+ android.intent.category.LEANBACK_LAUNCHER 过滤器。添加这个主要是为了googleplay的区分识别，没有添加相 应过滤器的应用，googleplay是不允许上架的
+
+git clone -b 7.1_tv_new http://10.168.1.200/geniatech/DTVPlayer.git

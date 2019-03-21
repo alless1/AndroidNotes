@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+//自定义生成jar，过滤文件。
+task makeJar(type: Jar, dependsOn: ['build']) {
+    archiveName = 'my-lib.jar'  //指定生成jar名
+    from('build/intermediates/classes/release/') //代码来源.class文件
+    //from(project.zipTree("libs/yaya_sdk_lib.jar")) //代码来源 第三方jar
+    destinationDir = file('build/libs') //指定生成jar的位置
+    exclude('com/example/lib/BuildConfig.class') //过滤不需要的文件。
+    exclude('**/R.class')
+    include('com/example/lib/') //指定需要打包成jar的文件
+    //include('com/blm/') //指定需要打包成jar的文件,第三方jar的文件。
+    //include('com/pg/')
+    //include('com/yunva/im/')
+}

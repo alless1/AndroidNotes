@@ -1,0 +1,19 @@
+public int binary_search(int arr[], int x) {
+		int min = 0;
+		int max = arr.length - 1;
+		int mid = (min + max) / 2;
+		for (int i = 0; i < arr.length - 1; i++) {
+			if (min <= max) {
+				if (x < arr[mid]) {
+					max = mid;
+					mid = (min + max) / 2;
+				} else if (x > arr[mid]) {
+					min = mid;
+					mid = (min + max) / 2;
+				} else {
+					return mid;
+				}
+			}
+		}
+		return -1;
+	}

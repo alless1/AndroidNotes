@@ -1,0 +1,17 @@
+public class GrilsBean{
+    public List<ResultsBean> results;
+    static class ResultsBean {
+        public String _id;
+        public String createdAt;
+        public String desc;
+        public String publishedAt;
+        public String source;
+        public String type;
+        public String url;
+        public boolean used;
+        public String who;
+    }
+}
+
+mGson.fromJson(result, GrilsBean.class);
+Gson解析,会根据Bean类里是否包含json文件里的key,而不在乎是什么形式获取类参数,例如get/set.

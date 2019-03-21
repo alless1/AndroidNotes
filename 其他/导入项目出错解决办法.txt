@@ -1,0 +1,16 @@
+1.指定gradle插件版本
+将项目文件buil.gradle中的
+classpath 'com.android.tools.build:gradle:2.2.3'
+gradle版本改成,androida安装目录下的版本.
+	G:\android-studio-2.2.3\gradle\m2repository\com\android\tools\build\gradle
+
+2.指定gradle版本
+将项目中的grade文件夹中的gradle-wrapper.properties文件中的
+distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip
+gradle版本改成,android安装目录下的版本
+	G:\android-studio-2.2.3\gradle\gradle-2.14.1
+
+3.指定build-tools版本 选择最新的即可  向下兼容
+项目文件导入后提示buildtolls版本低的话,修改module中的build.gradle中的buildToolsVersion '25.0.2'
+改为sdk文件夹中的build-tools的版本;
+	E:\myandroid\sdk\build-tools 

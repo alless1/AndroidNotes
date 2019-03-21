@@ -1,0 +1,17 @@
+1.在defaultConfig 中已经声明 multiDexEnabled true 用于启用MultiDex
+    defaultConfig {
+         ...
+        multiDexEnabled true
+    }
+
+2.在依赖中添加 compile 'com.android.support:multidex:1.0.1' 支持包用于5.0以下系统
+
+3.如果你的工程中已经含有Application类,那么让它继承android.support.multidex.MultiDexApplication类,如果你的Application已经继承了其他类并且不想做改动，那么还有另外一种使用方式,覆写attachBaseContext()方法:
+
+public class MyApplication extends FooApplication {
+        @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+}
