@@ -1,0 +1,2 @@
+1.为什么不能在子线程弹Toast？"Can't toast on a thread that has not called Looper.prepare()"
+答：因为在Toast的初始化过程中，有一个TN的内部类，需要looper对象。如果在子线程中获取Looper.myLooper()，自然是为null的。
