@@ -1,0 +1,27 @@
+杀死apt进程。
+hlp@hlp-Lenovo-G405:~$ ps afx|grep apt
+ 3284 pts/0    S+     0:00          \_ grep --color=auto apt
+ 2869 ?        Ss     0:00 /bin/sh /usr/lib/apt/apt.systemd.daily install
+ 2873 ?        S      0:00  \_ /bin/sh /usr/lib/apt/apt.systemd.daily lock_is_held install
+
+hlp@hlp-Lenovo-G405:~$ sudo kill -9 2873
+hlp@hlp-Lenovo-G405:~$ sudo kill -9 2869
+
+下载目录：
+http://www.tortall.net/projects/yasm/releases
+从该目录下可以找到合适平台的合适版本。
+下载源代码：
+
+wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz
+
+有一个安装的帖子，里面有安装流程，缺少yasw的。最新1.3.0版本。
+http://www.tortall.net/projects/yasm/releases
+./configure
+make
+sudo make install
+
+中间有权限错误问题。
+sudo chmod -R 777 /usr/local/bin
+sudo chmod -R 777 /usr/local/lib/node_modules
+
+最后安装stf不要用sudo

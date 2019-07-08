@@ -26,12 +26,13 @@
 	public class MyAppModule extends AbstractModule {
 	    @Override
 	    protected void configure() {
-	        //初始化绑定映射关系
+	        //初始化绑定映射关系（和@ImplementedB作用一样）
 	        bind(LogService.class).to(LogServiceImpl.class);
 	    }
 	}
 
 	普通类，如果没有继承关系或者不是通过父类应用，可以直接获取。有继承关系的如果有明确指定实现类也可以直接获取。
+	
 
 	@ImplementedBy(PersonImpl.class)
 	public interface IPerson {
@@ -39,3 +40,8 @@
 	}
 
 	mInjector.getInstance(IPerson.class);//可以获取到PersonImpl
+
+> 补充
+
+	@Singleton表示单例
+	Guice需要实例化对象，请确保相应被实例化的对象有默认构造器。

@@ -1,3 +1,19 @@
+
+打开应用
+adb shell am start -n com.hjimi.core/com.hjimi.TestActivity
+
+卸载应用
+adb shell pm list packages
+adb uninstall com.xxx.xxx
+
+截图
+adb shell screencap -p /sdcard/01.png
+
+
+//查看系统运行时间
+adb shell cat /proc/uptime
+
+
 查看端口占用情况
 netstat -ano
 
