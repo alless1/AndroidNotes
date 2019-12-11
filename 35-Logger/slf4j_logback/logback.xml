@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2010-2011 The myBatis Team
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+        http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!-- debug属性用来决定是否打印logback的日志信息 -->
+<configuration>
+    <!-- 定义日志路径 -->
+    <property name="LOG_FILE" value="downloadRes" />
+    <!--声明一个属性, 用来指定log文件存放的路径 -->
+    <property name="LOG_DIR" value="/mnt/sdcard/Ubox/log/test1" />
+
+    <property name="maxHistory" value="5"/>
+
+    <!--控制台打印日志-->
+    <appender name="Logcat" class="ch.qos.logback.classic.android.LogcatAppender">
+        <encoder>
+            <pattern>[%thread] %msg</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 声明一个RollingFileAppender -->
+    <appender name="BASE_ROLE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- onMatch是与level匹配的是否允许输出，onMismatch是与level不匹配的是否允许输出-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <!--根据时间+文件大小滚动日志文件
+            时间：精确到天，最大记录天数maxHistory天
+            文件：单个文件大小控制在maxFileSize,多出的会xx_0.zip,xx_1.zip… -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件后缀.log，压缩文件后缀.zip-->
+            <fileNamePattern>${LOG_DIR}/${LOG_FILE}_%d{yyyyMMdd}_%i.log.zip</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 输出log的格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level- %msg%xEx%n</pattern>
+        </encoder>
+    </appender>
+    <!--总的log级别开关-->
+    <root level="INFO">
+        <appender-ref ref="BASE_ROLE_FILE" />
+        <appender-ref ref="Logcat" />
+    </root>
+</configuration>

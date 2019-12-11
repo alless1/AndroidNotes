@@ -1,5 +1,20 @@
 > 在android{}里添加代码。
 
+
+### 生成aar的方式 ###
+
+点击右边的gradle-tasks-build-assemble
+
+生成文件的目录build-outputs-aar
+
+如果生成的so文件没有打包进去。
+
+        release {
+			ndk {
+				abiFilters 'armeabi','armeabi-v7a'
+			}
+        }
+
 #### 一、自定义apk的名字 ####
 
 	

@@ -47,6 +47,6 @@
 
 3.使用命令，将准备好的jar上传到本地仓库。
 
-	mvn install:install-file -Dfile=D:\my_lib.jar -DgroupId=com.alless.mylib1 -DartifactId=mylib1 -Dversion=1.0.0 -Dpackaging=jar
+	mvn install:install-file -Dfile=D:\my_lib.jar -DgroupId=com.uboxol.usocket -DartifactId=uSocket -Dversion=1.6.4-SNAPSHOT -Dpackaging=jar
 
 

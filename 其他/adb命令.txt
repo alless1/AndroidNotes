@@ -6,6 +6,12 @@ adb shell am start -n com.hjimi.core/com.hjimi.TestActivity
 adb shell pm list packages
 adb uninstall com.xxx.xxx
 
+安装应用
+adb install -r 包名
+-r是强制安装，不管是否已存在相同应用。
+adb install -t 包名
+-t是允许安装测试apk，有的debug包会报安装测试包错误。
+
 截图
 adb shell screencap -p /sdcard/01.png
 
@@ -22,6 +28,8 @@ adb shell dumpsys activity activities 显示当前activity
 
 监控进程5秒刷新
 adb shell "top -d 5 | grep com.hm.accelerator"
+adb shell "top -n -1 | grep com.vinda.ucvcamera"
+adb shell "top -d 5 | grep com.vinda.ucvcamera"
 
 退出
 exit
