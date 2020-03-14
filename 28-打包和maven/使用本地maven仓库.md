@@ -24,11 +24,12 @@
 2.在项目根目录的build.gradle，添加mavenLocal();
 
     repositories {
-
+    
         ...
         mavenLocal();
-      
-        
+
+
+​        
     }
 
 3.在app目录的build.gradle，添加依赖
@@ -47,6 +48,12 @@
 
 3.使用命令，将准备好的jar上传到本地仓库。
 
-	mvn install:install-file -Dfile=D:\my_lib.jar -DgroupId=com.uboxol.usocket -DartifactId=uSocket -Dversion=1.6.4-SNAPSHOT -Dpackaging=jar
+```shell
+mvn install:install-file -Dfile=D:\my_lib.jar -DgroupId=com.uboxol.usocket -DartifactId=uSocket -Dversion=1.6.4-SNAPSHOT -Dpackaging=jar
+
+mvn install:install-file -Dfile=/Users/chengjie/Desktop/my_uSocket.jar -DgroupId=com.uboxol.usocket -DartifactId=uSocket -Dversion=1.6.4-SNAPSHOT -Dpackaging=jar
+
+
+```
 
 
