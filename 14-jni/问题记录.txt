@@ -1,0 +1,11 @@
+1.使用uvcCamera的时候，始终无法build成功，总是提示finished-with-non-zero-exit-value-2-on-android。
+在确定ndk版本路径无误以后，还是无法build成功，提示相同的问题。后来使用命令行编译是正常的。
+/Users/chengjie/Library/Android/sdk/ndk/android-ndk-r14b/ndk-build -C /Users/chengjie/AndroidStudioProjects/demo/camerasave/UvcCameraDemo-master/libuvccamera/src/main/jni -j 4 NDK_OUT=../jniLibs all NDK_DEBUG=1
+
+然后在stackoverflow上看到说删除 "yourLibary/main/src/obj"这个目录下生成的库文件，然后就好了。
+（https://stackoverflow.com/questions/42480211/how-to-ndk-setting-finished-with-non-zero-exit-value-2-on-android）
+
+2.始终无法断点调试c代码，sdkManager里也没有lldb的下载项，但其实不是lldb的问题，在Android studio应用目录里/Contents/bin目录下已经存在lldb目录，说明是和应用一起安装的，而不是像以前在sdkmanager里去下载。网上的说法是在app gradle里添加debugImplementation project(path: ':libuvccamera')，在lib gradle里添加 publishNonDefault true，然后在configurations里Debugger 选择Native.可是会有错误提示，Attention! No symbol directories found- please check your native debug configuration。在Symbol Directories里添加你生成so文件的local路径，/Users/chengjie/AndroidStudioProjects/test/TestVisual/libuvccamera/src/main/obj/local。
+
+
+/Users/chengjie/Library/Android/sdk/ndk/android-ndk-r14b/ndk-build -C /Users/chengjie/AndroidStudioProjects/demo/camerademo/UVCCamera-master/libuvccamera/src/main/jni -j 4 NDK_OUT=../jniLibs all NDK_DEBUG=1

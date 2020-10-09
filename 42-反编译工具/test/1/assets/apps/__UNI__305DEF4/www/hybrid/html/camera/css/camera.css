@@ -1,0 +1,8 @@
+.titleNview-placing {
+	padding-top: 28px;
+	box-sizing: content-box;
+}
+video,
+canvas {
+	position: absolute;
+}

@@ -1,4 +1,8 @@
 
+adb wifi
+1.手机与电脑用数据线连接，打开命令行窗口,执行adb tcpip 5555
+2.断开数据线连接，执行 adb connect 192.168.13.104:5555(手机ip)
+
 打开应用
 adb shell am start -n com.hjimi.core/com.hjimi.TestActivity
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+		<title>摄像</title>
+		<link rel="stylesheet" href="./css/camera.css" />
+	</head>
+	<body>
+		<div class="titleNview-placing"></div>
+		<div class="page">
+			<div class="demo-frame">
+				<div class="demo-container">
+					<video id="video" width="320" height="320" preload autoplay loop muted></video>
+					<canvas id="canvas" width="320" height="320"></canvas>
+					<img id="image" style="width:320px;height:320px"/>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="./js/tracking/tracking.js"></script>
+	<script type="text/javascript" src="./js/tracking/data/face-min.js"></script>
+	<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.1.js"></script>
+	<script type="text/javascript" src="./js/camera.js"></script>
+</html>

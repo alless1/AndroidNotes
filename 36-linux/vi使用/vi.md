@@ -16,6 +16,8 @@
 
 * :wq（write quit）保存退出
 * :q!（quit）不保存退出
+* :set number 显示行号
+* :1,10d 删除1-10行
 
 撤销/反撤销
 

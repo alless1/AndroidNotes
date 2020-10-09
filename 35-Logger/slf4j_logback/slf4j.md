@@ -5,7 +5,7 @@
 #### 1.依赖 ####
 
 	dependencies {
-
+	
 	    implementation 'org.slf4j:slf4j-api:1.7.25'
 	    implementation 'com.github.tony19:logback-android:2.0.0'
 	}
@@ -62,4 +62,31 @@
 
 #### 3.初始化 ####
 
-	Logger mLogger = LoggerFactory.getLogger("DownloadCfgRes");//参数不能为空字符串，否则控制台无法输出日志。
+	Logger mLogger = LoggerFactory.getLogger(VmLog.class);//参数不能为空字符串，否则控制台无法输出日志。
+
+示例
+
+~~~java
+public class Foo {
+    static final Logger logger= LoggerFactory.getLogger(Foo.class);
+    public void doIt(){
+        logger.debug("Did it again!");
+    }
+}
+~~~
+
+
+
+## 记录
+
+![](../img/logback结构.png)
+
+* <logger>元素有且仅有一个 name 属性、一个可选的level 属性和一个可选的 additivity 属性。<logger>元素可以包含零个或多个<appender-ref>元素。
+
+* <root>元素配置根 logger。该元素有一个 level 属性。没有 name 属性，因为已经被命名
+
+  为“ROOT”。
+
+  > 所以root其实是一个叫ROOT的<logger>标签
+
+定制化操作，详见logback2.xml说明。

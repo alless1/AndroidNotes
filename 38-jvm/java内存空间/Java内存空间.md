@@ -39,6 +39,35 @@ new关键字创建对象的3个步骤：
 * -Xmx256m（最大heap内存）
 * -XX:+HeapDumpOnOutOfMemoryError（打印oom信息）
 * -Xss160k（堆栈的大小，最少160k以上）
+* -XX:MaxMetaspaceSize=200m（元空间的内存大小，64位机器初始值21M，达到这个值会触发Full GC）
+  * -XX:MaxPermSize 永久代的大小（32位机器默认64M，64位的机器默认85M）
 
+#### 元空间调试工具
 
+* jmap -clstats PID 打印类加载器数据
+* jstat -gc PID 打印空间占据信息。MC当前元空间分配大小，MU元空间使用大小（kb）
+* jps 打开jvm相关进程。
+  * jps -l 显示进程名和pid
+  * jps -m 显示更多信息 （和jcmd -l一样）
+* jcmd PID VM.flags 显示进程启动的jvm参数
+* jcmd PID help 查看可以对当前进程执行的操作
 
+#### jcmd（从JDK1.7开始新增加的命令）
+
+* jcmd pid VM.flags：查看JVM的启动参数
+* jcmd pid help：列出当前运行的java进程可以执行的操作
+* jcmd pid help JFR.dump：查看具体命令的选项
+* jcmd pid PerfCounter.print：查看JVM性能相关的参数
+* jcmd pid VM.uptime：查看JVM的启动时长
+* jcmd pid GC.class_histogram：查看系统中类的统计信息
+* jcmd pid Thread.print：查看线程堆栈信息
+* jcmd pid GC.heap_dump filename：导出Heap dump文件，导出的文件可以通过jvisualvm查看
+* jcmd pid VM.system_properties：查看JVM的属性信息
+* jcmd pid VM.version：查看目标JVM进程的版本信息
+* jcmd pid VM.command_line：查看JVM启动的命令行参数信息
+
+#### 测试工具
+
+JConsole
+
+jvisualvm

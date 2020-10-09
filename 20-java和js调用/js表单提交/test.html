@@ -1,0 +1,173 @@
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <title>这是个标题</title>
+        <script>
+function requesText()
+{
+document.getElementById("field2").value=document.getElementById("field1").value;
+}
+</script>
+    </head>
+    <body>
+        <h1>这是一个一个简单的HTML</h1>
+        <p>Hello World！</p>
+
+         <button onclick="requesText()">Click Me!</button>
+    </body>
+
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.bootcss.com/vConsole/3.2.2/vconsole.min.js"></script>
+<script>var vConsole = new VConsole();</script>
+<script type="text/javascript">
+
+        var K_version = "version";
+        var K_merNo = "merNo";
+        var K_merName = "merName";
+        var K_openId = "openId";
+        var K_tokenCode = "tokenCode";
+        var K_pageCallbackUrl = "pageCallbackUrl";
+        var K_agreementCallbackUrl = "agreementCallbackUrl";
+        var K_breakAgreementCallbackUrl = "breakAgreementCallbackUrl";
+        var K_errorBackUrl = "errorBackUrl";
+        var K_expand = "expand";
+        var K_signMode = "signMode";
+        var K_wostoreTime = "wostoreTime";
+        var K_storeOrderId = "storeOrderId";
+        var K_reqCharSet = "reqCharSet";
+        var K_signType = "signType";
+        var K_signMsg = "signMsg";
+     
+
+
+    window.onload = function(){ 
+        /*获取url附带的参数*/
+         var version = GetQueryString(K_version);
+         var merNo = GetQueryString(K_merNo);
+         var merName = GetQueryString(K_merName);
+         var openId = GetQueryString(K_openId);
+         var tokenCode = GetQueryString(K_tokenCode);
+         var pageCallbackUrl = GetQueryString(K_pageCallbackUrl);
+         var agreementCallbackUrl = GetQueryString(K_agreementCallbackUrl);
+         var breakAgreementCallbackUrl = GetQueryString(K_breakAgreementCallbackUrl);
+         var errorBackUrl = GetQueryString(K_errorBackUrl);
+         //var expand = GetQueryString(K_expand);
+         var signMode = GetQueryString(K_signMode);
+         var wostoreTime = GetQueryString(K_wostoreTime);
+         var storeOrderId = GetQueryString(K_storeOrderId);
+         var reqCharSet = GetQueryString(K_reqCharSet);
+         var signType = GetQueryString(K_signType);
+         var signMsg = GetQueryString(K_signMsg);
+
+         /*解码*/
+        merName = UrlDecode(merName);
+        //expand = UrlDecode(expand);
+
+
+         /*赋值到表单*/
+        document.getElementById(K_version).value = version;
+        document.getElementById(K_merNo).value = merNo;
+        document.getElementById(K_merName).value = merName;
+        document.getElementById(K_openId).value = openId;
+        document.getElementById(K_tokenCode).value = tokenCode;
+        document.getElementById(K_pageCallbackUrl).value = pageCallbackUrl;
+        document.getElementById(K_agreementCallbackUrl).value = agreementCallbackUrl;
+        document.getElementById(K_breakAgreementCallbackUrl).value = breakAgreementCallbackUrl;
+        document.getElementById(K_errorBackUrl).value = errorBackUrl;
+        //document.getElementById(K_expand).value = expand;
+        document.getElementById(K_signMode).value = signMode;
+        document.getElementById(K_wostoreTime).value = wostoreTime;
+        document.getElementById(K_storeOrderId).value = storeOrderId;
+        document.getElementById(K_reqCharSet).value = reqCharSet;
+        document.getElementById(K_signType).value = signType;
+        document.getElementById(K_signMsg).value = signMsg;
+
+        /*打印数据*/
+        console.log('version = '+version) 
+        console.log('merNo = '+merNo) 
+        console.log('merName = '+merName) 
+        console.log('openId = '+openId) 
+        console.log('tokenCode = '+tokenCode) 
+        console.log('pageCallbackUrl = '+pageCallbackUrl) 
+        console.log('agreementCallbackUrl = '+agreementCallbackUrl) 
+        console.log('breakAgreementCallbackUrl = '+breakAgreementCallbackUrl) 
+        console.log('errorBackUrl = '+errorBackUrl) 
+        console.log('expand = '+expand) 
+        console.log('signMode = '+signMode) 
+        console.log('wostoreTime = '+wostoreTime) 
+        console.log('storeOrderId = '+storeOrderId) 
+        console.log('reqCharSet = '+reqCharSet) 
+        console.log('signType = '+signType) 
+        console.log('signType = '+signMsg) 
+    }
+
+    function getWebUrl () {
+      console.log('1--->进入getUrl方法')
+      this.getUrl = window.location.search // 获取页面url中'？'之后的参数
+      if (this.getUrl.indexOf('?') !== -1) {
+        this.orderId = this.GetQueryString('orderId')
+        if (this.orderId !== '') {
+          console.log('orderid是：', this.orderId)
+        } else {
+          console.log('orderid为空：', this.getUrl)
+          alert('网络异常，请稍候再试')
+        }
+      } else {
+        console.log('页面链接没有参数：', this.getUrl)
+        alert('网络异常，请稍候再试')
+      }
+    }
+    // 页面链接根据参数名获取参数信息
+    function GetQueryString (name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg) // 获取url中"?"符后的字符串并正则匹配
+      var context = ''
+      if (r != null) { context = r[2] }
+      reg = null
+      r = null
+      return context === null || context === '' || context === 'undefined' ? '' : context
+    }
+
+    function UrlDecode(strArr){
+    //            var encoded = "";
+    // for (var i = 0; i < strArr.length; i++) {
+    //     encoded += '%' + strArr[i].toString(16);
+    // }
+      return decodeURIComponent(strArr);
+    }
+</script>
+<title>表单提交示例 - 基本表单提交</title>
+</head>
+<body>
+<form action="https://epay.10010.com/secretfreepay/signConfirm" method="post" >
+<!--     ID：<input id="username" type="text" name="username" />
+    Password：<input id="password" type="password" name="password" /> -->
+    <input id="version" name="version" type="text" value=""/>
+    <input id="merNo" name="merNo" type="text" value=""/>
+    <input id="merName" name="merName" type="text" value="" />
+    <input id="openId" name="openId" type="text" value=""/>
+    <input id="tokenCode" name="tokenCode" type="text" value=""/>
+    <input id="pageCallbackUrl" name="pageCallbackUrl" type="text" value="" />
+    <input id="agreementCallbackUrl" name="agreementCallbackUrl" type="text" value="" />
+    <input id="breakAgreementCallbackUrl" name="breakAgreementCallbackUrl" type="text" value="" />
+    <input id="errorBackUrl" name="errorBackUrl" type="text" value="" />
+   <!--  <input id="expand" name="expand" type="text" value="" /> -->
+    <input id="signMode" name="signMode" type="text" value="" />
+    <input id="wostoreTime" name="wostoreTime" type="text" value="" />
+    <input id="storeOrderId" name="storeOrderId" type="text" value="" />
+    <input id="reqCharSet" name="reqCharSet" type="text" value="" />
+    <input id="signType" name="signType" type="text" value="" />
+    <input id="signMsg" name="signMsg" type="text" value="" />
+
+    <br />
+    <input type="submit" value="Submit" />
+
+</form>
+
+
+</body>
+</html>

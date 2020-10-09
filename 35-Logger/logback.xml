@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?><!--debug true打印初始化信息-->
+<configuration debug="true">
+    <!--    <contextName>mytestContextName</contextName>-->
+    
+    <!--自定义属性值，可以被引用。${USER_HOME} -->
+    <property name="USER_HOME" value="/home/sebastien" />
+    <property name="LOG_DIR" value="/mnt/sdcard/ubox/log/mytest" />
+
+    <!--timestamp 元素有两个属性:key 和 datePattern。属性 key 是变量名，对余下的配置元素 可用。属性 datePattern 表示把当前时间(解析配置文件的时间)转换成字符串时使用的日期 模式，遵从 java.text.SimpleDateFormat 里的约定。-->
+    <timestamp datePattern="yyyyMMdd" key="today" />
+
+    <!--使用控制台输出的话（system.out），LoggerFactory.getLogger(""）,可以传空字符串。-->
+    <!--android的logcat输出ch.qos.logback.classic.android.LogcatAppender，logger名不能为空字符串-->
+    <appender name="SOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}- %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--最流行的滚动策略RollingFileAppender-->
+    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--如果不配置file,按fileNamePattern命名文件，如果配置file，先以file为文件名，然后滚动触发时以fileNamePattern命名-->
+        <!--通过设置“file”属性，你可以为活动记录文件和归档记录文件指定不同的位置-->
+        <file>${LOG_DIR}/testFile.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--%i是数字序列，%d是按日期，yyyyMM按月滚动，yyyyMMdd按天滚动-->
+            <!--.gz或者.zip表示需要压缩。滚动以后，上一次的文件就会被自动压缩。-->
+            <fileNamePattern>${LOG_DIR}/testFile.%d.%i.log.zip</fileNamePattern>
+            <!--保留归档文件，超出数量删除旧文件。按滚动条件计算数量。如果按天滚动，30就是30天。30天之前的删除。-->
+            <maxHistory>30</maxHistory>
+            <!--基于大小和时间的归档-->
+            <!--注意“%i”。在当前时间周期结束之前 ，每当当前记录文件达到“maxFileSize” 时，就会用递增索引归档，索引从 0 开始.单位bytes、KB、MB 或 GB-->
+            <timeBaseFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBaseFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+    <!--        <file>/sdcard/myAPP.log</file>-->
+    <!--        &lt;!&ndash;-->
+    <!--encoders are assigned by default the type-->
+    <!--ch.qos.logback.classic.encoder.PatternLayoutEncoder &ndash;&gt;-->
+    <!--        <encoder>-->
+    <!--            <pattern>-->
+    <!--                %date %level [%thread] %logger{10} [%file:%line] %msg%n-->
+    <!--            </pattern>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
+
+    <!--会屏蔽掉子类的低级别日志 com.example是这个包以下的所有类的logger的父类logger-->
+    <!--additivity false会解除根的ref,只会打印自己的ref-->
+    <logger name="com.example" additivity="false" level="INFO">
+
+    </logger>
+    <!--这样才会解掉限制-->
+    <logger name="com.example.logbackdemo.Foo" level="DEBUG" />
+
+    <!--根这里的优先级低于上面logger中配置的-->
+    <!--根logger是所有logger的父类，会被其他logger继承-->
+    <root level="debug">
+        <appender-ref ref="SOUT" />
+    </root>
+</configuration>
