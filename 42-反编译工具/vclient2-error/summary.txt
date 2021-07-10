@@ -1,0 +1,30 @@
+There are 25 methods fail to translate.
+2021-01-13 02:02:34 UTC
+version: [dex-reader-2.0, dex-reader-api-2.0, dex-ir-2.0, d2j-smali-2.0, d2j-base-cmd-2.0, dex-tools-2.0, dex-translator-2.0]
+cmdline: [vclient2.dex]
+env:
+java.runtime.name: Java(TM) SE Runtime Environment
+java.vm.version: 25.231-b11
+java.vm.vendor: Oracle Corporation
+java.vendor.url: http://java.oracle.com/
+java.vm.name: Java HotSpot(TM) 64-Bit Server VM
+java.vm.specification.name: Java Virtual Machine Specification
+java.runtime.version: 1.8.0_231-b11
+java.awt.graphicsenv: sun.awt.CGraphicsEnvironment
+java.endorsed.dirs: /Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/endorsed
+java.io.tmpdir: /var/folders/0g/vnyxmd_d05lcwct3xq_7n89m0000gn/T/
+java.vm.specification.vendor: Oracle Corporation
+java.library.path: /Users/chengjie/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+java.specification.name: Java Platform API Specification
+java.class.version: 52.0
+java.awt.printerjob: sun.lwawt.macosx.CPrinterJob
+java.specification.version: 1.8
+java.class.path: .:./lib/antlr-runtime-3.5.jar:./lib/asm-debug-all-4.1.jar:./lib/d2j-base-cmd-2.0.jar:./lib/d2j-jasmin-2.0.jar:./lib/d2j-smali-2.0.jar:./lib/dex-ir-2.0.jar:./lib/dex-reader-2.0.jar:./lib/dex-reader-api-2.0.jar:./lib/dex-tools-2.0.jar:./lib/dex-translator-2.0.jar:./lib/dex-writer-2.0.jar:./lib/dx-1.7.jar
+java.vm.specification.version: 1.8
+java.home: /Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
+java.specification.vendor: Oracle Corporation
+java.vm.info: mixed mode
+java.version: 1.8.0_231
+java.ext.dirs: /Users/chengjie/Library/Java/Extensions:/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+java.vendor: Oracle Corporation
+java.vendor.url.bug: http://bugreport.sun.com/bugreport/

@@ -1,0 +1,42 @@
+Lcom/uboxol/vclient/vmc/msg/pc2vmc/v3/V3_ControlIndMsg;.createModel1(IZ)Lcom/uboxol/vclient/vmc/msg/pc2vmc/v3/V3_ControlIndMsg;
+java.lang.RuntimeException: can not merge I and Z
+	at com.googlecode.dex2jar.ir.TypeClass.merge(TypeClass.java:100)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeRef.updateTypeClass(TypeTransformer.java:174)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.copyTypes(TypeTransformer.java:311)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.fixTypes(TypeTransformer.java:226)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.analyze(TypeTransformer.java:207)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer.transform(TypeTransformer.java:44)
+	at com.googlecode.d2j.dex.Dex2jar$2.optimize(Dex2jar.java:162)
+	at com.googlecode.d2j.dex.Dex2Asm.convertCode(Dex2Asm.java:414)
+	at com.googlecode.d2j.dex.ExDex2Asm.convertCode(ExDex2Asm.java:42)
+	at com.googlecode.d2j.dex.Dex2jar$2.convertCode(Dex2jar.java:128)
+	at com.googlecode.d2j.dex.Dex2Asm.convertMethod(Dex2Asm.java:509)
+	at com.googlecode.d2j.dex.Dex2Asm.convertClass(Dex2Asm.java:406)
+	at com.googlecode.d2j.dex.Dex2Asm.convertDex(Dex2Asm.java:422)
+	at com.googlecode.d2j.dex.Dex2jar.doTranslate(Dex2jar.java:172)
+	at com.googlecode.d2j.dex.Dex2jar.to(Dex2jar.java:272)
+	at com.googlecode.dex2jar.tools.Dex2jarCmd.doCommandLine(Dex2jarCmd.java:108)
+	at com.googlecode.dex2jar.tools.BaseCmd.doMain(BaseCmd.java:288)
+	at com.googlecode.dex2jar.tools.Dex2jarCmd.main(Dex2jarCmd.java:32)
+
+
+.method public static createModel1(IZ)Lcom/uboxol/vclient/vmc/msg/pc2vmc/v3/V3_ControlIndMsg;
+    .registers 10
+    const/4 v0, 2
+    new-array v7, v0, [B
+    invoke-static { p0 }, Lcom/uboxol/vclient/util/ByteUtil;->makeByte1(I)B
+    move-result p0
+    const/4 v0, 0
+    aput-byte p0, v7, v0
+    const/4 p0, 1
+    aput-byte p1, v7, p0
+    new-instance p0, Lcom/uboxol/vclient/vmc/msg/pc2vmc/v3/V3_ControlIndMsg;
+    const/16 v2, 231
+    const/16 v3, 133
+    const/4 v4, -1
+    const/4 v5, 1
+    const/4 v6, 3
+    move-object v1, p0
+    invoke-direct/range { v1 .. v7 }, Lcom/uboxol/vclient/vmc/msg/pc2vmc/v3/V3_ControlIndMsg;-><init>(IIIZI[B)V
+    return-object p0
+.end method

@@ -1,0 +1,1 @@
+apksigner sign --ks ubox_android.keystore --ks-key-alias ubox_android.keystore --ks-pass pass:ubox2011 --key-pass pass:ubox2011 --out output.apk /Users/chengjie/Desktop/未命名文件夹/app-debug.apk 

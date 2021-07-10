@@ -1,0 +1,57 @@
+Landroidx/appcompat/widget/ButtonBarLayout;.setStacked(Z)V
+java.lang.RuntimeException: can not merge I and Z
+	at com.googlecode.dex2jar.ir.TypeClass.merge(TypeClass.java:100)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeRef.updateTypeClass(TypeTransformer.java:174)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.copyTypes(TypeTransformer.java:311)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.fixTypes(TypeTransformer.java:226)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.analyze(TypeTransformer.java:207)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer.transform(TypeTransformer.java:44)
+	at com.googlecode.d2j.dex.Dex2jar$2.optimize(Dex2jar.java:162)
+	at com.googlecode.d2j.dex.Dex2Asm.convertCode(Dex2Asm.java:414)
+	at com.googlecode.d2j.dex.ExDex2Asm.convertCode(ExDex2Asm.java:42)
+	at com.googlecode.d2j.dex.Dex2jar$2.convertCode(Dex2jar.java:128)
+	at com.googlecode.d2j.dex.Dex2Asm.convertMethod(Dex2Asm.java:509)
+	at com.googlecode.d2j.dex.Dex2Asm.convertClass(Dex2Asm.java:406)
+	at com.googlecode.d2j.dex.Dex2Asm.convertDex(Dex2Asm.java:422)
+	at com.googlecode.d2j.dex.Dex2jar.doTranslate(Dex2jar.java:172)
+	at com.googlecode.d2j.dex.Dex2jar.to(Dex2jar.java:272)
+	at com.googlecode.dex2jar.tools.Dex2jarCmd.doCommandLine(Dex2jarCmd.java:108)
+	at com.googlecode.dex2jar.tools.BaseCmd.doMain(BaseCmd.java:288)
+	at com.googlecode.dex2jar.tools.Dex2jarCmd.main(Dex2jarCmd.java:32)
+
+
+.method private setStacked(Z)V
+    .registers 3
+    invoke-virtual { p0, p1 }, Landroidx/appcompat/widget/ButtonBarLayout;->setOrientation(I)V
+    if-eqz p1, :L0
+    const/4 v0, 5
+    goto :L1
+    :L0
+    const/16 v0, 80
+    :L1
+    invoke-virtual { p0, v0 }, Landroidx/appcompat/widget/ButtonBarLayout;->setGravity(I)V
+    sget v0, Landroidx/appcompat/R$id;->spacer:I
+    invoke-virtual { p0, v0 }, Landroidx/appcompat/widget/ButtonBarLayout;->findViewById(I)Landroid/view/View;
+    move-result-object v0
+    if-eqz v0, :L4
+    if-eqz p1, :L2
+    const/16 p1, 8
+    goto :L3
+    :L2
+    const/4 p1, 4
+    :L3
+    invoke-virtual { v0, p1 }, Landroid/view/View;->setVisibility(I)V
+    :L4
+    invoke-virtual { p0 }, Landroidx/appcompat/widget/ButtonBarLayout;->getChildCount()I
+    move-result p1
+    add-int/lit8 p1, p1, -2
+    :L5
+    if-ltz p1, :L6
+    invoke-virtual { p0, p1 }, Landroidx/appcompat/widget/ButtonBarLayout;->getChildAt(I)Landroid/view/View;
+    move-result-object v0
+    invoke-virtual { p0, v0 }, Landroidx/appcompat/widget/ButtonBarLayout;->bringChildToFront(Landroid/view/View;)V
+    add-int/lit8 p1, p1, -1
+    goto :L5
+    :L6
+    return-void
+.end method

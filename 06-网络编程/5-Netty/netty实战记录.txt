@@ -1,0 +1,26 @@
+在 Netty 发送消息有两种方式。您可以直接写消息给 Channel 或写入 ChannelHandlerContext 对象。主要的区别是， 前一种方法会导致消息从 ChannelPipeline的 尾部开始，而 后者导致消息从 ChannelPipeline 下一个处理器开始。
+
+阻塞操作
+I/O 线程一定不能完全阻塞，因此禁止任何直接阻塞操作在你的 ChannelHandler， 有一种方 法来实现这一要求。你可以指定一个 EventExecutorGroup 当添加 ChannelHandler 到 ChannelPipeline。此 EventExecutorGroup 将用于获得EventExecutor，将执行所有的 ChannelHandler 的方法。这EventExecutor 将从 I/O 线程使用不同的线程，从而释放 EventLoop。
+
+ByteBuf 一定符合:0 <= readerIndex <= writerIndex <= capacity。
+
+
+现在 整个 ByteBuf 空间都是可写的了。
+clear() 比 discardReadBytes() 更低成本，因为他只是重置了索引，而没有内存拷贝。
+
+Channel lifeycle states
+channelUnregistered channel已创建但未注册到一个 EventLoop.
+Channel 的正常的生命周期如下图，当状态出现变化，就会触发对应的事件，这样就能与 ChannelPipeline 中的 ChannelHandler进行及时的交互。
+
+Channel 生命周期channelRegistered channel 注册到一个 EventLoop.channelActive
+channel 变为活跃状态(连接到了远程主机)，现在可以接收和发 送数据了channelInactive channel 处于非活跃状态，没有连接到远程主机
+
+ChannelHandler 生命周期
+handlerAdded 当 ChannelHandler 添加到 ChannelPipeline 调用
+handlerRemoved 当 ChannelHandler 从 ChannelPipeline 移除时调用
+exceptionCaught 当 ChannelPipeline 执行抛出异常时调用
+
+1.扩展 SimpleChannelInboundHandler 2.不需做特别的释放资源的动作
+
+总之,使用 @Sharable 的话，要确定 ChannelHandler 是线程安全的。

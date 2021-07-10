@@ -1,0 +1,121 @@
+Lcom/uboxol/vclient/vmc/msg/VmcMsgUtil;.encode(Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;)[B
+java.lang.RuntimeException: can not merge I and Z
+	at com.googlecode.dex2jar.ir.TypeClass.merge(TypeClass.java:100)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeRef.updateTypeClass(TypeTransformer.java:174)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.provideAs(TypeTransformer.java:780)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.enexpr(TypeTransformer.java:659)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:719)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:703)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.e2expr(TypeTransformer.java:629)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:716)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:703)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.e2expr(TypeTransformer.java:629)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:716)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:703)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.e1expr(TypeTransformer.java:539)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:713)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.exExpr(TypeTransformer.java:703)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.s2stmt(TypeTransformer.java:820)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.sxStmt(TypeTransformer.java:843)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer$TypeAnalyze.analyze(TypeTransformer.java:206)
+	at com.googlecode.dex2jar.ir.ts.TypeTransformer.transform(TypeTransformer.java:44)
+	at com.googlecode.d2j.dex.Dex2jar$2.optimize(Dex2jar.java:162)
+	at com.googlecode.d2j.dex.Dex2Asm.convertCode(Dex2Asm.java:414)
+	at com.googlecode.d2j.dex.ExDex2Asm.convertCode(ExDex2Asm.java:42)
+	at com.googlecode.d2j.dex.Dex2jar$2.convertCode(Dex2jar.java:128)
+	at com.googlecode.d2j.dex.Dex2Asm.convertMethod(Dex2Asm.java:509)
+	at com.googlecode.d2j.dex.Dex2Asm.convertClass(Dex2Asm.java:406)
+	at com.googlecode.d2j.dex.Dex2Asm.convertDex(Dex2Asm.java:422)
+	at com.googlecode.d2j.dex.Dex2jar.doTranslate(Dex2jar.java:172)
+	at com.googlecode.d2j.dex.Dex2jar.to(Dex2jar.java:272)
+	at com.googlecode.dex2jar.tools.Dex2jarCmd.doCommandLine(Dex2jarCmd.java:108)
+	at com.googlecode.dex2jar.tools.BaseCmd.doMain(BaseCmd.java:288)
+	at com.googlecode.dex2jar.tools.Dex2jarCmd.main(Dex2jarCmd.java:32)
+
+
+.method public static encode(Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;)[B
+    .registers 9
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getDatas()[B
+    move-result-object v0
+    const/4 v1, 0
+    if-nez v0, :L0
+    const/4 v0, 0
+    goto :L1
+    :L0
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getDatas()[B
+    move-result-object v0
+    array-length v0, v0
+    :L1
+    add-int/lit8 v0, v0, 7
+    new-array v2, v0, [B
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getSf()I
+    move-result v3
+    int-to-byte v3, v3
+    aput-byte v3, v2, v1
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getDatas()[B
+    move-result-object v3
+    const/4 v4, 5
+    const/4 v5, 2
+    const/4 v6, 1
+    if-nez v3, :L2
+    aput-byte v4, v2, v6
+    goto :L3
+    :L2
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getDatas()[B
+    move-result-object v3
+    array-length v3, v3
+    add-int/lit8 v3, v3, 7
+    sub-int/2addr v3, v5
+    int-to-byte v3, v3
+    aput-byte v3, v2, v6
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getDatas()[B
+    move-result-object v3
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getDatas()[B
+    move-result-object v7
+    array-length v7, v7
+    invoke-static { v3, v1, v2, v4, v7 }, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
+    :L3
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->isAck()Z
+    move-result v3
+    shl-int/lit8 v3, v3, 7
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getVer()I
+    move-result v4
+    or-int/2addr v3, v4
+    int-to-byte v3, v3
+    aput-byte v3, v2, v5
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getMt()I
+    move-result v3
+    int-to-byte v3, v3
+    const/4 v4, 3
+    aput-byte v3, v2, v4
+    const/4 v3, 4
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getSn()I
+    move-result v5
+    int-to-byte v5, v5
+    aput-byte v5, v2, v3
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getVer()I
+    move-result v3
+    if-ge v3, v4, :L4
+    aget-byte p0, v2, v6
+    invoke-static { v2, v6, p0 }, Lcom/uboxol/vclient/vmc/msg/VmcMsgUtil;->checksum_v2([BII)I
+    move-result v1
+    goto :L5
+    :L4
+    invoke-virtual { p0 }, Lcom/uboxol/vclient/vmc/msg/VmcBaseMsg;->getVer()I
+    move-result p0
+    if-ne p0, v4, :L5
+    aget-byte p0, v2, v6
+    invoke-static { v2, v6, p0 }, Lcom/uboxol/vclient/vmc/msg/VmcMsgUtil;->checksum_crc([BII)I
+    move-result v1
+    :L5
+    add-int/lit8 p0, v0, -2
+    shr-int/lit8 v3, v1, 8
+    and-int/lit16 v3, v3, 255
+    int-to-byte v3, v3
+    aput-byte v3, v2, p0
+    sub-int/2addr v0, v6
+    and-int/lit16 p0, v1, 255
+    int-to-byte p0, p0
+    aput-byte p0, v2, v0
+    return-object v2
+.end method
