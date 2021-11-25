@@ -43,14 +43,14 @@
 > 如果配置了proguard-rules.pro，并且开启了minifyEnabled true，那么系统生成的jar已经混淆过了，没必要手动混淆。
 
  	//混淆jar包
-	task proguard(type: proguard.gradle.ProGuardTask,dependsOn: ['build']) {
-	
-	    injars 'build/libs/my-lib.jar' //输入路径
-	
-	    outjars 'build/libs/my-lib2.jar' //输出路径
-	
-	    configuration 'proguard-rules.pro' //添加配置信息
-	}
+ 	task proguard(type: proguard.gradle.ProGuardTask,dependsOn: ['build']) {
+ 	
+ 	    injars 'build/libs/my-lib.jar' //输入路径
+ 	
+ 	    outjars 'build/libs/my-lib2.jar' //输出路径
+ 	
+ 	    configuration 'proguard-rules.pro' //添加配置信息
+ 	}
 
 总结，其实只要用系统生成的jar包就可以了，不用手动指定文件和第三方文件，也不用自己混淆。所以只需要用步骤2复制改名就可以，如果找不到或没有系统生成的jar，就用步骤1的方法生成jar包。
 
@@ -77,3 +77,36 @@ from( 'build/intermediates/packaged-classes/release')
 	    //重命名
 	    rename('classes.jar', 'cloudvoice_speed_up_sdk.jar')
 	}
+
+
+
+5. mac 下使用gradle执行终端指令，将jar转换成dex。
+
+   ~~~java
+   dependencies {
+       implementation fileTree(dir: 'libs', include: ['*.jar'])
+   }
+   
+   def buildDate() {
+       return new SimpleDateFormat("yyyyMMdd_HHmm").format(new Date())
+   }
+   
+   
+   task makeDex(type: Exec,dependsOn: ['build']){
+   
+       def buildDir = project.buildDir.getAbsolutePath()
+       File libFile = new File(buildDir+"/libs")
+       if(!libFile.exists()){
+           libFile.mkdirs();
+       }
+       //系统生成的jar文件,版本不同的地址不一样。
+       def srcPath = buildDir+"/intermediates/packaged-classes/release/classes.jar";
+       //需要生成的dex文件对象
+       def desPath = libFile.getAbsolutePath()+"/script_${android.defaultConfig.versionName}_${buildDate()}.dex"
+       //def desPath = libFile.getAbsolutePath()+"/target.dex"
+       def cmd = "dx --dex --output="+desPath+" "+srcPath
+       commandLine 'bash','-c',cmd
+   }
+   ~~~
+
+   

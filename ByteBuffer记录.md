@@ -22,6 +22,7 @@
 * limit：可用大小，可能会变。
 * position：某个字节的位置（length），随着读写变化。
 * remaining：剩余字节数量，和position相对应，position+remaining=limit。
+* clear:清空，postion,remaining置为0
 
 #### 切换动作
 
@@ -85,7 +86,7 @@
   printBuffer: position=40,remaining=60,limit=100,capacity=100
   ~~~
 
-*  get：position = position + 读取的字节数	,remaining = limit - position
+*  get：position = position + 读取的字节数	,remaining = limit - position
 
   ~~~java
   onClick: 读取5字节

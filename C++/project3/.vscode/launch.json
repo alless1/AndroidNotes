@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "g++ - 生成和调试活动文件",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/cmake_main",//当前的可执行文件
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "Build"//指向tasks
+        }
+    ]
+}
