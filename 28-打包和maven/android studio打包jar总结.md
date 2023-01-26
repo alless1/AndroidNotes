@@ -80,33 +80,48 @@ from( 'build/intermediates/packaged-classes/release')
 
 
 
-5. mac 下使用gradle执行终端指令，将jar转换成dex。
+### mac 下使用gradle执行终端指令，将jar转换成dex。
 
-   ~~~java
-   dependencies {
-       implementation fileTree(dir: 'libs', include: ['*.jar'])
-   }
-   
-   def buildDate() {
-       return new SimpleDateFormat("yyyyMMdd_HHmm").format(new Date())
-   }
-   
-   
-   task makeDex(type: Exec,dependsOn: ['build']){
-   
-       def buildDir = project.buildDir.getAbsolutePath()
-       File libFile = new File(buildDir+"/libs")
-       if(!libFile.exists()){
-           libFile.mkdirs();
-       }
-       //系统生成的jar文件,版本不同的地址不一样。
-       def srcPath = buildDir+"/intermediates/packaged-classes/release/classes.jar";
-       //需要生成的dex文件对象
-       def desPath = libFile.getAbsolutePath()+"/script_${android.defaultConfig.versionName}_${buildDate()}.dex"
-       //def desPath = libFile.getAbsolutePath()+"/target.dex"
-       def cmd = "dx --dex --output="+desPath+" "+srcPath
-       commandLine 'bash','-c',cmd
-   }
-   ~~~
+~~~java
 
-   
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+def buildDate() {
+    return new SimpleDateFormat("yyyyMMdd_HHmm").format(new Date())
+}
+
+//添加makeJar任务，生成jar位置 build/libs/scriptlib.jar
+android.libraryVariants.all { variant ->
+
+    def name = variant.buildType.name
+
+    if(name.equals(com.android.builder.core.BuilderConstants.RELEASE)){
+        def task = project.tasks.create "makeJar${name.capitalize()}", Jar
+        task.dependsOn variant.javaCompile
+        task.from variant.javaCompile.destinationDir
+        artifacts.add('archives', task);
+    }
+}
+
+//通过cmd指令，将jar转换成dex
+task makeDex(type: Exec, dependsOn: ['build']) {
+
+    println project.name;
+
+    def buildDir = project.buildDir.getAbsolutePath()
+    File libFile = new File(buildDir + "/libs")
+    if (!libFile.exists()) {
+        libFile.mkdirs();
+    }
+    //jar文件地址。当前使用上面makeJar生成的路径
+    def srcPath = libFile.getAbsolutePath()+"/${project.name}.jar";
+    //需要生成的dex文件对象
+    def desPath = libFile.getAbsolutePath() + "/${project.name}_${android.defaultConfig.versionName}_${buildDate()}.dex"
+    def cmd = "dx --dex --output=" + desPath + " " + srcPath
+    commandLine 'bash', '-c', cmd
+
+}
+~~~
+

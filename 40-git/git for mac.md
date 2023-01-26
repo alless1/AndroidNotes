@@ -104,6 +104,8 @@
    * git config --system
 2. ~/.gitcofig （针对用户，cd目录，常用）
    * git config --global
+     * 设置账户git config --global user.name xxx
+     * 设置密码git config --global user.password xxx
 3. 针对于当前项目.git/config （针对项目，常用，git config --local user.name xxx）
    * git config --local 
 
@@ -368,59 +370,59 @@ git tag -d v1.0
 ├── description
 ├── gitk.cache
 ├── hooks
-│   ├── applypatch-msg.sample
-│   ├── commit-msg.sample
-│   ├── fsmonitor-watchman.sample
-│   ├── post-update.sample
-│   ├── pre-applypatch.sample
-│   ├── pre-commit.sample
-│   ├── pre-push.sample
-│   ├── pre-rebase.sample
-│   ├── pre-receive.sample
-│   ├── prepare-commit-msg.sample
-│   └── update.sample
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── fsmonitor-watchman.sample
+│   ├── post-update.sample
+│   ├── pre-applypatch.sample
+│   ├── pre-commit.sample
+│   ├── pre-push.sample
+│   ├── pre-rebase.sample
+│   ├── pre-receive.sample
+│   ├── prepare-commit-msg.sample
+│   └── update.sample
 ├── index
 ├── info
-│   └── exclude
+│   └── exclude
 ├── logs
-│   ├── HEAD
-│   └── refs
-│       ├── heads
-│       │   ├── dev
-│       │   ├── master
-│       │   ├── test
-│       │   └── test2
-│       └── remotes
-│           └── origin
-│               ├── dev
-│               ├── master
-│               ├── test
-│               └── test2
+│   ├── HEAD
+│   └── refs
+│       ├── heads
+│       │   ├── dev
+│       │   ├── master
+│       │   ├── test
+│       │   └── test2
+│       └── remotes
+│           └── origin
+│               ├── dev
+│               ├── master
+│               ├── test
+│               └── test2
 ├── objects		//节点信息，04+a1…… 代表commitID，这是一个节点二进制文件。
-│   ├── 04
-│   │   ├── a1d15db3309daaf962dcc4dc9d00f2a2877d58
-│   │   └── a3311d219ce2e4f47f457201fc90a030a042b0
-│   ├── f4
-│   │   └── a958c87f2dc711bf3926d6a455f737a34d49b5
-│   ├── f7
-│   │   └── 61ec192d9f0dca3329044b96ebdb12839dbff6
-│   ├── info
-│   └── pack
+│   ├── 04
+│   │   ├── a1d15db3309daaf962dcc4dc9d00f2a2877d58
+│   │   └── a3311d219ce2e4f47f457201fc90a030a042b0
+│   ├── f4
+│   │   └── a958c87f2dc711bf3926d6a455f737a34d49b5
+│   ├── f7
+│   │   └── 61ec192d9f0dca3329044b96ebdb12839dbff6
+│   ├── info
+│   └── pack
 ├── refs		//本地分支、远程分支、标签，的指针信息。
-│   ├── heads
-│   │   ├── dev
-│   │   ├── master
-│   │   ├── test
-│   │   └── test2
-│   ├── remotes
-│   │   └── origin
-│   │       ├── dev
-│   │       ├── master
-│   │       ├── test
-│   │       └── test2
-│   └── tags
-│       ├── v1.0
-│       └── v2.0
+│   ├── heads
+│   │   ├── dev
+│   │   ├── master
+│   │   ├── test
+│   │   └── test2
+│   ├── remotes
+│   │   └── origin
+│   │       ├── dev
+│   │       ├── master
+│   │       ├── test
+│   │       └── test2
+│   └── tags
+│       ├── v1.0
+│       └── v2.0
 ~~~
 
 

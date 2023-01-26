@@ -25,7 +25,7 @@
         <!--通过设置“file”属性，你可以为活动记录文件和归档记录文件指定不同的位置-->
         <file>${LOG_DIR}/testFile.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--%i是数字序列，%d是按日期，yyyyMM按月滚动，yyyyMMdd按天滚动-->
+            <!--%i是数字序列，%d{yyyy-MM-dd}是按天，%d{yyyy-MM}按月滚动-->
             <!--.gz或者.zip表示需要压缩。滚动以后，上一次的文件就会被自动压缩。-->
             <fileNamePattern>${LOG_DIR}/testFile.%d.%i.log.zip</fileNamePattern>
             <!--保留归档文件，超出数量删除旧文件。按滚动条件计算数量。如果按天滚动，30就是30天。30天之前的删除。-->
@@ -56,7 +56,7 @@
     <!--    </appender>-->
 
     <!--会屏蔽掉子类的低级别日志 com.example是这个包以下的所有类的logger的父类logger-->
-    <!--additivity false会解除根的ref,只会打印自己的ref-->
+    <!--additivity false会解除根的ref,只会打印自己的ref,要配置appender-ref-->
     <logger name="com.example" additivity="false" level="INFO">
 
     </logger>
